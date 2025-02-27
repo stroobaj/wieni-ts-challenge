@@ -19,8 +19,7 @@ export const Card = () => {
 
         <h3 className="text-lg font-bold">Preparation</h3>
         <div className="text-sm">
-          Build into an old-fashioned glass filled with ice. Top with a splash
-          of soda water.
+          Build into an old-fashioned glass filled with ice. Top with a splash of soda water.
         </div>
       </div>
     </div>
