@@ -1,14 +1,40 @@
-type Cocktail = {
+export interface Cocktail {
+  glass: Glass;
+  ingredients: (StandardIngredient | SpecialIngredient)[];
   name: string;
-  glass: string;
-  category: string;
-  ingredients: Ingredient[];
-  garnish: string;
-  preparation: string;
-};
+  category?: CocktailCategory;
+  garnish?: string;
+  preparation?: string;
+}
 
-type Ingredient = {
-  unit: string;
+export interface StandardIngredient {
   amount: number;
   ingredient: string;
-};
+  unit: string;
+  label?: string;
+}
+
+export interface SpecialIngredient {
+  special: string;
+}
+
+export type Glass =
+  | 'champagne-flute'
+  | 'champagne-tulip'
+  | 'collins'
+  | 'highball'
+  | 'hot-drink'
+  | 'hurricane'
+  | 'margarita'
+  | 'martini'
+  | 'old-fashioned'
+  | 'shot'
+  | 'white-wine';
+
+export type CocktailCategory =
+  | 'After Dinner Cocktail'
+  | 'All Day Cocktail'
+  | 'Before Dinner Cocktail'
+  | 'Hot Drink'
+  | 'Longdrink'
+  | 'Sparkling Cocktail';

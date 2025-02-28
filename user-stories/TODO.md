@@ -1,6 +1,6 @@
 # Backlog
 
-1. [ ] **Define TypeScript Interfaces** *(See: types.md)*
+1. [x] **Define TypeScript Interfaces** *(See: types.md)*
 2. [ ] **Build 404 Not Found Page** *(See: not-found.md)*
 3. [ ] **Create Responsive Navigation** *(See: navigation.md)*
 4. [ ] **Implement Reusable Card Component** *(See: props.md)*
