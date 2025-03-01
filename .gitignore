@@ -38,3 +38,6 @@ next-env.d.ts
 
 # IntelliJ IDEA
 .idea
+
+# Lighthouse
+/lighthouse-reports/

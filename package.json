@@ -5,6 +5,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
+    "lighthouse": "node --experimental-json-modules ci/lighthouse.mjs",
+    "lighthouse:routes": "node --experimental-json-modules ci/lighthouse-routes.mjs",
     "lint": "next lint",
     "ngrok": "ngrok http 3000 --log=stdout",
     "start": "next start"
@@ -19,10 +21,13 @@
     "@types/node": "^20.17.19",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
+    "chrome-launcher": "^1.1.2",
     "eslint": "^9.21.0",
     "eslint-config-next": "^15.2.0",
     "eslint-config-prettier": "^10.0.2",
+    "lighthouse": "^12.4.0",
     "msw": "^2.7.3",
+    "node-fetch": "^3.3.2",
     "postcss": "^8.5.3",
     "prettier": "^3.5.2",
     "tailwindcss": "^3.4.17",
