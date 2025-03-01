@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "next dev",
+    "lint": "next lint",
+    "ngrok": "ngrok http 3000 --log=stdout",
+    "start": "next start"
   },
   "dependencies": {
     "next": "15.2.0",
