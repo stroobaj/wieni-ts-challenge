@@ -1,3 +1,6 @@
+import cocktails from '../api/cocktails/cocktails.json';
+import { CocktailCard } from '@/app/components/CocktailCard';
+
 export default async function RecipePage() {
   return (
     <main>
@@ -10,6 +13,8 @@ export default async function RecipePage() {
           <code className="text-sm font-light">/api/recipes/all</code>.
         </p>
       </div>
+      {/*@ts-expect-error: Typing error since cocktails are not mapped yet. Remove this line and fetch the cocktails from the API */}
+      <CocktailCard cocktail={cocktails[0]} />
     </main>
   );
 }
