@@ -24,7 +24,5 @@ export async function GET(request: NextRequest) {
     .sort((a, b) => b.popularityScore - a.popularityScore)
     .slice(0, validLimit);
 
-  console.log('Popular cocktails:', popularCocktails);
-
   return Response.json(popularCocktails);
 }
