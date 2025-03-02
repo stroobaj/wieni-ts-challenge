@@ -1,4 +1,4 @@
-import cocktails from './cocktails.json';
+import cocktails from '@/app/data/cocktails.json';
 
 export async function GET() {
   await new Promise((resolve) => setTimeout(resolve, 1e3));

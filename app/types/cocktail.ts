@@ -7,6 +7,10 @@ export interface Cocktail {
   preparation?: string;
 }
 
+export interface CocktailWithPopularity extends Cocktail {
+  popularityScore: number;
+}
+
 export interface StandardIngredient {
   amount: number;
   ingredient: string;
