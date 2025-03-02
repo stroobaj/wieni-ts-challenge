@@ -31,9 +31,13 @@ export const CocktailCard = ({ cocktail }: CocktailCardProps) => {
       <div className="block space-y-2 h-full">
         <h2 className="text-2xl font-bold">{name}</h2>
         <div className="flex flex-wrap gap-1 mb-2">
-          {category && (
+          {category ? (
             <span className="inline-block rounded bg-pink-200 px-2 py-1 text-xs font-semibold uppercase text-pink-800">
               {category}
+            </span>
+          ) : (
+            <span className="inline-block rounded bg-gray-200 px-2 py-1 text-xs font-semibold uppercase text-gray-800">
+              Uncategorized
             </span>
           )}
           <span className="inline-block rounded bg-blue-200 px-2 py-1 text-xs font-semibold uppercase text-blue-800">
