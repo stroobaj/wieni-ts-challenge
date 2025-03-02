@@ -27,25 +27,29 @@ export const CocktailCard = ({ cocktail }: CocktailCardProps) => {
   };
 
   return (
-    <div className="flex border border-gray-200 bg-white/50 p-4">
-      <div className="block space-y-2">
+    <div className="flex flex-col h-full border border-gray-200 bg-white/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+      <div className="block space-y-2 h-full">
         <h2 className="text-2xl font-bold">{name}</h2>
-        {category && (
-          <span className="mr-1 inline-block rounded bg-pink-200 px-2 py-1 text-xs font-semibold uppercase text-pink-800 last:mr-0">
-            {category}
+        <div className="flex flex-wrap gap-1 mb-2">
+          {category && (
+            <span className="inline-block rounded bg-pink-200 px-2 py-1 text-xs font-semibold uppercase text-pink-800">
+              {category}
+            </span>
+          )}
+          <span className="inline-block rounded bg-blue-200 px-2 py-1 text-xs font-semibold uppercase text-blue-800">
+            {glass}
           </span>
-        )}
-
-        <h3 className="text-lg font-bold">Glass</h3>
-        <div className="text-sm">{glass}</div>
+        </div>
 
         <h3 className="text-lg font-bold">Ingredients</h3>
-        <ul className="list-inside list-disc px-1 text-sm">{ingredients.map(renderIngredient)}</ul>
+        <ul className="list-inside list-disc px-1 text-sm mb-2">
+          {ingredients.map(renderIngredient)}
+        </ul>
 
         {preparation && (
           <>
             <h3 className="text-lg font-bold">Preparation</h3>
-            <div className="text-sm">{preparation}</div>
+            <div className="text-sm mb-2">{preparation}</div>
           </>
         )}
 

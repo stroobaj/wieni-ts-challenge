@@ -42,9 +42,9 @@ export default async function Home() {
       </div>
 
       {hasPopularCocktails ? (
-        <ul className="mt-6 list-none p-0">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sortedCocktails.map((cocktail) => (
-            <li className="mb-6" key={cocktail.name}>
+            <li className="flex flex-col h-full" key={cocktail.name}>
               <CocktailCard cocktail={cocktail} />
             </li>
           ))}

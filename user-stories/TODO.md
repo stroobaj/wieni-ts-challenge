@@ -6,5 +6,5 @@
 4. [x] **Implement Reusable Card Component** *(See: props.md)*
 5. [x] **Implement Server-Side Fetching for Recipes Page** *(See: server-side-fetch.md)*
 6. [x] **Display Popular Cocktails on Homepage** *(See: popular.md)*
-7. [ ] **Implement Responsive Grid Layout** *(See: responsive-grid.md)*
+7. [x] **Implement Responsive Grid Layout** *(See: responsive-grid.md)*
 8. [ ] **Create Search Functionality** *(See: search.md)*
