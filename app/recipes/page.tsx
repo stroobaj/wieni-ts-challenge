@@ -52,13 +52,13 @@ export default async function Page({ searchParams }: PageProps) {
       </div>
 
       {paginatedCocktails.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {paginatedCocktails.map((cocktail) => (
-            <div className="flex flex-col h-full" key={cocktail.name}>
+            <li className="flex flex-col h-full" key={cocktail.name}>
               <CocktailCard cocktail={cocktail} />
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       ) : (
         <p className="text-center text-gray-500 mt-6">No cocktails found.</p>
       )}
