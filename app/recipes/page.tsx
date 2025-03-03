@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
-import { CocktailCard } from '@/app/components/CocktailCard';
-import { Pagination } from '@/app/components/Pagination';
 import { Cocktail } from '@/app/types/cocktail';
+import RecipesPage from './client';
 
 export const metadata: Metadata = {
   title: 'Cocktail Recipes',
@@ -44,26 +43,10 @@ export default async function Page({ searchParams }: PageProps) {
   );
 
   return (
-    <main className="container mx-auto px-4">
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold mb-2">All Cocktail Recipes</h1>
-        <div className="w-24 h-1 bg-gray-800 mx-auto mb-3"></div>
-        <p className="text-gray-600">Discover our collection of classic and innovative cocktails</p>
-      </div>
-
-      {paginatedCocktails.length > 0 ? (
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-          {paginatedCocktails.map((cocktail) => (
-            <li className="flex flex-col h-full" key={cocktail.name}>
-              <CocktailCard cocktail={cocktail} />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="text-center text-gray-500 mt-6">No cocktails found.</p>
-      )}
-
-      <Pagination currentPage={currentPage} totalPages={totalPages} />
-    </main>
+    <RecipesPage
+      initialCocktails={paginatedCocktails}
+      currentPage={currentPage}
+      totalPages={totalPages}
+    />
   );
 }
