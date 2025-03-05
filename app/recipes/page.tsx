@@ -10,43 +10,54 @@ export const metadata: Metadata = {
 interface PageProps {
   searchParams: Promise<{
     page?: string;
+    limit?: string;
   }>;
 }
 
-const COCKTAILS_PER_PAGE = 10;
+interface PaginatedResponse {
+  cocktails: Cocktail[];
+  pagination: {
+    page: number;
+    limit: number;
+    totalItems: number;
+    totalPages: number;
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+  };
+}
 
-const getCocktails = async (): Promise<Cocktail[]> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/cocktails`);
+const getCocktails = async (page: number = 1, limit: number = 10): Promise<PaginatedResponse> => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/cocktails?page=${page}&limit=${limit}`,
+    { cache: 'no-store' },
+  );
 
   if (!res.ok) {
     throw new Error('Failed to fetch cocktails');
   }
 
-  return (await res.json()) as Cocktail[];
+  return await res.json();
 };
 
 export default async function Page({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const page = Number(params?.page || 1);
+  const limit = Number(params?.limit || 10);
+
   let cocktails: Cocktail[] = [];
-  const resolvedSearchParams = await searchParams;
-  const currentPage = Number(resolvedSearchParams?.page || 1);
+  let totalPages = 1;
+  let currentPage = page;
 
   try {
-    cocktails = await getCocktails();
+    const response = await getCocktails(page, limit);
+    cocktails = response.cocktails;
+    totalPages = response.pagination.totalPages;
+    currentPage = response.pagination.page;
   } catch (error) {
     console.error('Error fetching cocktails:', error);
   }
 
-  const totalPages = Math.ceil(cocktails.length / COCKTAILS_PER_PAGE);
-  const paginatedCocktails = cocktails.slice(
-    (currentPage - 1) * COCKTAILS_PER_PAGE,
-    currentPage * COCKTAILS_PER_PAGE,
-  );
-
   return (
-    <RecipesPage
-      initialCocktails={paginatedCocktails}
-      currentPage={currentPage}
-      totalPages={totalPages}
-    />
+    <RecipesPage initialCocktails={cocktails} currentPage={currentPage} totalPages={totalPages} />
   );
 }

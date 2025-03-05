@@ -41,7 +41,7 @@ export default function RecipesPage({
             Discover our collection of classic and innovative cocktails
           </p>
 
-          <Search onSearch={(results, query) => handleSearch(results, query)} />
+          <Search onSearch={handleSearch} />
         </div>
 
         {filteredCocktails.length > 0 ? (

@@ -17,6 +17,7 @@ export const Search = ({ onSearch }: SearchProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [activeSearchTerm, setActiveSearchTerm] = useState('');
+  const [currentResults, setCurrentResults] = useState<Cocktail[]>([]);
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
   const handleClear = () => {
@@ -24,6 +25,7 @@ export const Search = ({ onSearch }: SearchProps) => {
     setShowResults(false);
     onSearch([], '');
     setActiveSearchTerm('');
+    setCurrentResults([]);
   };
 
   const handleFocus = () => {
@@ -41,28 +43,11 @@ export const Search = ({ onSearch }: SearchProps) => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && debouncedSearchTerm) {
+    if (e.key === 'Enter' && debouncedSearchTerm && currentResults.length > 0) {
       e.preventDefault();
-
-      const fetchAndApplyResults = async (): Promise<void> => {
-        const response = await fetch('/api/cocktails');
-        if (response.ok) {
-          const cocktails: Cocktail[] = await response.json();
-          const filtered = cocktails.filter((cocktail) =>
-            cocktail.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()),
-          );
-
-          if (filtered.length > 0) {
-            onSearch(filtered, debouncedSearchTerm);
-            setShowResults(false);
-            setActiveSearchTerm(debouncedSearchTerm);
-          } else {
-            setShowResults(true);
-          }
-        }
-      };
-
-      return fetchAndApplyResults();
+      onSearch(currentResults, debouncedSearchTerm);
+      setShowResults(false);
+      setActiveSearchTerm(debouncedSearchTerm);
     }
   };
 
@@ -70,6 +55,10 @@ export const Search = ({ onSearch }: SearchProps) => {
     onSearch(selectedCocktails, selectedSearchTerm);
     setShowResults(false);
     setActiveSearchTerm(selectedSearchTerm);
+  };
+
+  const updateCurrentResults = (results: Cocktail[]) => {
+    setCurrentResults(results);
   };
 
   useEffect(() => {
@@ -108,7 +97,11 @@ export const Search = ({ onSearch }: SearchProps) => {
       {showResults && debouncedSearchTerm && (
         <div className="absolute z-10 w-full">
           <div className="bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
-            <SearchResults searchTerm={debouncedSearchTerm} onSelect={handleResultSelect} />
+            <SearchResults
+              searchTerm={debouncedSearchTerm}
+              onSelect={handleResultSelect}
+              onResultsChange={updateCurrentResults}
+            />
           </div>
         </div>
       )}
